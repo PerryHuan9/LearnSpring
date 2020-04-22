@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="Knight" class="com.learn.di.Knight">
+        <constructor-arg ref="DragonQuest" />
+        <property name="title" value="生于忧患，死于安乐" />
+        <property name="friends">
+            <list>
+                <value>宁为鸡头</value>
+                <value>不为凤尾</value>
+                <value>大道五十</value>
+                <value>天衍四九</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="DragonQuest" class="com.learn.di.DragonQuest">
+        <constructor-arg value="#{T(System).out}" />
+    </bean>
+    <bean id="PatrolQuest" class="com.learn.di.PatrolQuest"/>
+
+    <bean id="Minstrel" class="com.learn.di.Minstrel">
+        <constructor-arg value="#{T(System).out}"/>
+    </bean>
+    <aop:config>
+        <aop:aspect ref="Minstrel">
+            <aop:pointcut id="embark" expression="execution(* *.embarkOnQuest(..))" />
+            <aop:before method="singBeforeQuest" pointcut-ref="embark" />
+            <aop:after method="singAfterQuest" pointcut-ref="embark" />
+        </aop:aspect>
+    </aop:config>
+</beans>

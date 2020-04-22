@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="Student" class="com.learn.aop.Student">
+        <constructor-arg value="3"/>
+        <constructor-arg ref="CollegeStudent" />
+    </bean>
+    <bean id="CollegeStudent" class="com.learn.aop.CollegeLearning"/>
+    <bean id="PrimaryStudent" class="com.learn.aop.CollegeLearning"/>
+    <bean id="MiddleStudent" class="com.learn.aop.CollegeLearning"/>
+    <bean id="RecordingTime" class="com.learn.aop.RecordingTime" />
+
+    <aop:config>
+        <aop:aspect ref="RecordingTime">
+            <aop:pointcut id="learning" expression="execution(* *.doLearning(..))" />
+            <aop:before method="recordStartTime" pointcut-ref="learning" />
+            <aop:after method="recordEndTime" pointcut-ref="learning" />
+        </aop:aspect>
+    </aop:config>
+</beans>
