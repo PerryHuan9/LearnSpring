@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
-@EnableWebMvc
 @Import(KnightConfig.class)
-@ImportResource({ "/student.xml"})
+@ImportResource({"/student.xml"})
+@EnableWebMvc
 public class LearnSpringApplication {
 
     public static void main(String[] args) {

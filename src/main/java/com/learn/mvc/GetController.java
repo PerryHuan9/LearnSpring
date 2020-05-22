@@ -1,20 +1,17 @@
 package com.learn.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.learn.mvc.bean.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.learn.mvc.bean.User;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 学习Get请求获取请求参数
- * 
  */
 @RestController
 @RequestMapping(value = "/test-get")
@@ -22,20 +19,20 @@ public class GetController {
 
     /**
      * 直接通过servletRequest对象获取参数 响应 /test-get/servlet?name={}&age={}
-     * 
+     *
      * @param request
      * @return
      */
     @GetMapping("/servlet")
-    public String getByHttpServlet(HttpServletRequest request) {
+    public Map getByHttpServlet(HttpServletRequest request) {
         String name = request.getParameter("name");
         int age = Integer.valueOf(request.getParameter("age"));
-        return "name:" + name + ",age:" + age;
+        return Map.of("name", name, "age", age);
     }
 
     /**
      * 通过同名参数 响应 /test-get/param?name={}&id={}
-     * 
+     *
      * @param id
      * @param name
      * @return
@@ -47,7 +44,7 @@ public class GetController {
 
     /**
      * 通过ResponseEntity指定HTTP响应的状态
-     * 
+     *
      * @return
      */
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -57,7 +54,7 @@ public class GetController {
 
     /**
      * 通过@PathVariable获取url参数
-     * 
+     *
      * @param petId
      * @param ownerId
      * @return
@@ -69,7 +66,7 @@ public class GetController {
 
     /**
      * 通过bean获取请求参数，未匹配的属性为null
-     * 
+     *
      * @param user
      * @return
      */
@@ -80,7 +77,7 @@ public class GetController {
 
     /**
      * 只能响应/pets/{petId}?myParam=myValue
-     * 
+     *
      * @param petId
      */
     @GetMapping(path = "/pets/{petId}", params = "myParam=myValue")
@@ -92,7 +89,7 @@ public class GetController {
     public List<User> getUsers() {
         List<User> users = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
-            User user = new User("Perry" + i, (int)(100 * Math.random()), "man", String.valueOf(i));
+            User user = new User("Perry" + i, (int) (100 * Math.random()), "man", String.valueOf(i));
             users.add(user);
         }
         return users;

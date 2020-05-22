@@ -1,4 +1,4 @@
-package com.learn.exception;
+package com.learn.mvc.exception;
 
 public class BaseException extends RuntimeException {
     protected int code;

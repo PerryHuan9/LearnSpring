@@ -1,4 +1,4 @@
-package com.learn.exception;
+package com.learn.mvc.exception;
 
 public class HandlerBody {
     private int code;

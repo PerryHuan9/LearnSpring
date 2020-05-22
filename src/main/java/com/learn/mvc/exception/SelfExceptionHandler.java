@@ -1,4 +1,4 @@
-package com.learn.exception;
+package com.learn.mvc.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,14 +11,16 @@ public class SelfExceptionHandler {
 
     @ExceptionHandler(BaseException.class)
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody HandlerBody handleNotFoundException(NotFountException e) {
+    public @ResponseBody
+    HandlerBody handleNotFoundException(NotFountException e) {
         System.out.println("ExceptionHandler;" + e);
         return new HandlerBody(e.code, e.message);
     }
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public @ResponseBody HandlerBody handleRuntimeException(RuntimeException e) {
+    public @ResponseBody
+    HandlerBody handleRuntimeException(RuntimeException e) {
         System.out.println("ExceptionHandler;" + e);
         return new HandlerBody(501, "服务器维护中，请稍后再尝试");
     }

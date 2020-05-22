@@ -1,6 +1,6 @@
-package com.learn.exception;
+package com.learn.mvc.exception;
 
-public class NotFountException extends BaseException{
+public class NotFountException extends BaseException {
     public static final int NOT_FOUND_CODE = 404;
 
     public NotFountException(String message) {
