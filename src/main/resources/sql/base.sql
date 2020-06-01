@@ -11,11 +11,11 @@ USE test;
 # 创建表
 CREATE TABLE classes
 (
-    id   BIGINT       NOT NULL AUTO_INCREMENT,
+    id   BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键',
     name VARCHAR(100) NOT NULL,
     PRIMARY KEY (id)
-) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+) COMMENT ='班级信息' ENGINE = InnoDB
+                  DEFAULT CHARSET = utf8;
 
 -- 创建students表：
 CREATE TABLE students
@@ -48,4 +48,30 @@ USE learnSql;
 
 DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS students;
+
+# 修改表注释
+ALTER table students
+    COMMENT '学生信息';
+
+# 查询对应表的注释
+SELECT table_name, table_comment
+from information_schema.TABLES
+where table_name = 'students';
+
+
+# 修改字段注释
+ALTER TABLE students
+    MODIFY column id int COMMENT '主键';
+
+#  查询对应表字段信息
+SELECT column_name, column_comment, column_type, column_key
+from information_schema.columns
+where table_name = 'students';
+
+
+
+
+
+
+
 

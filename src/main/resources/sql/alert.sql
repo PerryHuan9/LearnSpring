@@ -27,7 +27,7 @@ ALTER TABLE students
 
 # 在指定位置增加一列
 ALTER TABLE students
-    ADD [COLUMN] 字段名 字段类型 是否可为空 COMMENT '注释' AFTER 指定某字段;
+    ADD hobby VARCHAR(500) COMMENT '注释' AFTER score;
 
 # 删除列
 ALTER TABLE students
